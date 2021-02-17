@@ -10,15 +10,20 @@ module.exports = function (injectedStore) {
   }
   
   function list () {
-    return store.list(TABLA)
+    return store.list(TABLA);
   }
 
   function get (id) {
-    return store.get(TABLA, id)
+    return store.get(TABLA, id);
+  }
+
+  function upsert(data) {
+    return store.upsert(TABLA, data);
   }
 
   return {
     list,
-    get
-  }
+    get,
+    upsert,
+  };
 };
