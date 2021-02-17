@@ -7,7 +7,7 @@ exports.success = function (req, res, message, status) {
 
   res.status(statusCode).send({
     error: false,
-    status: status,
+    status: statusCode,
     body: statusMessage
   }); 
 }
@@ -17,8 +17,8 @@ exports.error = function (req, res, message, status) {
   let statusMessage = message || 'Internal server error';
 
   res.status(statusCode).send({
-    error: false,
-    status: status,
+    error: true,
+    status: statusCode,
     body: statusMessage
   }); 
 }
