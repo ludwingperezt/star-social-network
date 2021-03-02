@@ -15,6 +15,11 @@ const check = {
   own: function(req, owner) {
     const decodedToken = decodeHeader(req);
     console.log(decodedToken);
+
+    // Comprobar si es o NO propio
+    if (decodedToken.id !== owner) {
+      throw new Error('Acceso denegado!');
+    }
   }
 }
 
@@ -47,5 +52,6 @@ function decodeHeader(req) {
 }
 
 module.exports = {
-  sign
+  sign,
+  check,
 };

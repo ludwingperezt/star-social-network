@@ -1,5 +1,5 @@
 const express = require('express');
-
+const secure = require('./secure');
 const response = require('../../../network/response');
 const controller = require('./index');
 
@@ -39,5 +39,6 @@ function get(req, res) {
 router.get('/', list);
 router.post('/', upsert);
 router.get('/:id', get);
+router.put('/', secure('update'), upsert);
 
 module.exports = router;
