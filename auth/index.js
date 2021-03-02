@@ -19,7 +19,7 @@ const check = {
 
     // Comprobar si es o NO propio
     if (decodedToken.id !== owner) {
-      throw error('Acceso denegado!', 401);
+      throw error('Acceso denegado!', 403);
     }
   }
 }
@@ -29,11 +29,11 @@ function getToken(auth) {
   // token JWT.  El formato del header es 'Bearer asd...sfs.asdf...asdf.as...df'
 
   if (!auth) {
-    throw new Error('No viene token');
+    throw error('No hay token', 401);
   }
 
   if (auth.indexOf('Bearer ') === -1) {
-    throw new Error('Formato inválido');
+    throw error('Mal token', 400);
   } 
 
   let token = auth.replace('Bearer ', '');
