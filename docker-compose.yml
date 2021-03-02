@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:11
+    volumes:
+      - type: volume
+        source: platzi_node_practico_postgres_data
+        target: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "5050:80"
+volumes:
+  platzi_node_practico_postgres_data:
