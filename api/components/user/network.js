@@ -27,7 +27,10 @@ function upsert(req, res, next) {
 function get(req, res, next) {
   controller.get(req.params.id)
     .then((user) => {
-      response.success(req, res, user, 200);
+      if (user) {
+        response.success(req, res, user, 200);
+      }
+      response.error(req, res, 'No encontrado', 404)
     })
     .catch(next);
 }

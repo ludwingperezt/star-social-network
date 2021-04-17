@@ -1,4 +1,5 @@
 // Archivo del repositorio
+const error = require('../utils/error');
 
 const db = {
   'user': [
@@ -29,6 +30,10 @@ async function remove(tabla, id) {
   // Eliminar elemento de la tabla
   let coleccion = await list(tabla);
   let item = await get(tabla, id)
+
+  if (item === null) {
+    throw new error('No encontrado', 404)
+  }
   
   const index = coleccion.indexOf(item)
   coleccion.splice(index, 1)
@@ -49,14 +54,25 @@ async function insert (tabla, data) {
   if (!db[tabla]) {
     db[tabla] = [];
   }
-  db[tabla].push(data);
 
-  return data
+  const userExist = await query(tabla, {username: data.username})
+  
+  if (userExist === null) {
+    db[tabla].push(data);
+    return data
+  }
+  
+  throw new error('Usuario ya existe', 400)
 }
 
 async function update (tabla, id, data) {
   // Actualiza un elemento
   let item = await get(tabla, id)
+
+  if (item === null) {
+    throw new error('No encontrado', 404)
+  }
+  
   item = Object.assign(item, data)
   return item
 }
