@@ -40,8 +40,32 @@ module.exports = function (injectedStore) {
     return store.upsert(TABLA, authData);
   }
 
+  async function insert(data) {
+    // Insertar los datos de autenticacion: usuario y contraseña cifrada
+    const authData = {
+      id: data.id,
+    }
+
+    if (data.username) {
+      authData.username = data.username;
+    }
+
+    if (data.password) {
+      authData.password = await bcrypt.hash(data.password, 5);
+    }
+
+    return store.insert(TABLA, authData);
+  }
+
+  function remove(id) {
+    // Elimina los datos de auth
+    return store.remove(TABLA, id)
+  }
+
   return {
     upsert,
-    login
+    login,
+    insert,
+    remove
   }
 }

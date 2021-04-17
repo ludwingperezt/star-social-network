@@ -8,8 +8,13 @@ module.exports = function checkAuth(action) {
     switch(action) {
       case 'update':
         // lógica
-        const owner = req.body.id;
+        const owner = req.params.id || req.body.id;
         auth.check.own(req, owner);
+        next();
+        break;
+      case 'delete':
+        const owner1 = req.params.id;
+        auth.check.own(req, owner1);
         next();
         break;
       default:

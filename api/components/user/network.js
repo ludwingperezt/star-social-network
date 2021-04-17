@@ -32,9 +32,37 @@ function get(req, res, next) {
     .catch(next);
 }
 
+function insert(req, res, next) {
+  controller.insert(req.body)
+    .then(item => {
+      response.success(req, res, item, 201)
+    })
+    .catch(next)
+}
+
+function update(req, res, next) {
+  const data = {};
+  controller.update(req.params.id, req.body)
+    .then(item => {
+      response.success(req, res, item, 200);
+    })
+    .catch(next);
+}
+
+function remove(req, res, next) {
+  controller.remove(req.params.id)
+    .then(() => {
+      response.success(req, res, null, 204)
+    })
+    .catch(next);
+}
+
 router.get('/', list);
-router.post('/', upsert);
+// router.post('/', upsert);
+router.post('/', insert);
 router.get('/:id', get);
-router.put('/', secure('update'), upsert);
+//router.put('/', secure('update'), upsert);
+router.put('/:id', secure('update'), update);
+router.delete('/:id', secure('delete'), remove);
 
 module.exports = router;

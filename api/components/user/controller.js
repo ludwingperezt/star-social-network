@@ -22,6 +22,8 @@ module.exports = function (injectedStore) {
     const user = {
       name: body.name,
       username: body.username,
+      email: body.email,
+      phone: body.phone
     };
 
     if (body.id) {
@@ -41,9 +43,60 @@ module.exports = function (injectedStore) {
     return store.upsert(TABLA, user);
   }
 
+  async function insert(body) {
+    const user = {
+      name: body.name,
+      username: body.username,
+      email: body.email,
+      phone: body.phone,
+      id: nanoid()
+    };
+
+    if (body.password || body.username) {
+      // la contraseña se guarda en una coleccion diferente
+      await auth.insert({
+        id: user.id,
+        username: body.username,
+        password: body.password,
+      })
+    }
+
+    return store.insert(TABLA, user)
+  }
+
+  function update(id, body) {
+    const user = {id}
+
+    if (body.name) {
+      user.name = body.name
+    }
+
+    // if (body.username) {
+    //   user.username = body.username
+    // }
+
+    if (body.email) {
+      user.email = body.email
+    }
+
+    if (body.phone) {
+      user.phone = body.phone
+    }
+
+    return store.update(TABLA, id, user)
+  }
+
+  function remove(id) {
+    auth.remove(id)
+    return store.remove(TABLA, id)
+  }
+
   return {
     list,
     get,
     upsert,
+    insert,
+    update,
+    remove,
   };
 };
