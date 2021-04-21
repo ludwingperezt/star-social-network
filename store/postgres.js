@@ -7,6 +7,7 @@
  */
 const { Pool } = require('pg');
 const config = require('../config');
+const error = require('../utils/error');
 
 const SCHEMA = config.postgres.schema;
 
@@ -45,6 +46,103 @@ function list(table) {
     });
 }
 
+async function get (table, id) {
+  return pool.query(`SELECT * FROM ${SCHEMA}.${table} WHERE id = $1`,[id])
+    .then(res => {
+      return (res.rowCount) ? res.rows[0] : null;
+    });
+}
+
+async function remove(table, id) {
+  let item = await get(table, id)
+
+  if (item === null) {
+    throw new error('No encontrado', 404)
+  }
+
+  return pool.query(`DELETE FROM ${SCHEMA}.${table} WHERE id = $1`, [id]);
+}
+
+async function queryTable(table, q) {
+  const fieldsNames = Object.keys(q);
+  const values = []
+  const valuesRef = []
+
+  fieldsNames.forEach((item, index) => {
+      valuesRef.push(`${item} = $${index + 1}`)
+      values.push(q[item])
+    })
+
+  const valuesOrder = valuesRef.join(' AND ');
+
+  const query = `SELECT * FROM ${SCHEMA}.${table} WHERE ${valuesOrder}`
+
+  return pool
+    .query(query, values)
+    .then(res => {
+      return (res.rowCount) ? res.rows[0] : null;
+    });
+
+}
+
+async function insert (table, data) {
+  const fieldsNames = Object.keys(data);
+  let fields = fieldsNames.join(', ');
+  const values = []
+  const valuesRef = []
+
+  const userExist = await queryTable(table, {username: data.username})
+  
+  if (userExist !== null) {
+    throw new error('Usuario ya existe', 400)
+  }
+
+  fieldsNames.forEach((item, index) => {
+    values.push(data[item])
+    valuesRef.push(`$${index + 1}`)
+  })
+
+  const valuesOrder = valuesRef.join(', ');
+
+  const query = `INSERT INTO ${SCHEMA}.${table} (${fields}) VALUES (${valuesOrder}) RETURNING *`
+  return pool
+    .query(query, values)
+    .then(res => {
+      return res.rows[0];
+    });
+}
+
+async function update (table, id, data) {
+  const fieldsNames = Object.keys(data);
+  const values = [id]
+  const valuesRef = []
+  let indice = 2 //El conteo empieza en 2 ya que el 1 pertenece al ID del elemento
+
+  fieldsNames.forEach((item, index) => {
+    if (item !== 'id') {
+      valuesRef.push(`${item} = $${indice}`)  
+      values.push(data[item])
+
+      indice += 1
+    }
+  })
+
+  const valuesOrder = valuesRef.join(', ');
+
+  const query = `UPDATE ${SCHEMA}.${table} SET ${valuesOrder} WHERE id = $1 RETURNING *`
+
+  return pool
+    .query(query, values)
+    .then(res => {
+      return res.rows[0];
+    });
+}
+
 module.exports = {
   list,
+  get,
+  remove,
+  query: queryTable,
+  insert,
+  update
 };
