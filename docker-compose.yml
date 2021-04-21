@@ -6,6 +6,9 @@ services:
       - type: volume
         source: platzi_node_practico_postgres_data
         target: /var/lib/postgresql/data
+      - type: bind
+        source: ./databases
+        target: /root
     ports:
       - "5432:5432"
     environment:
