@@ -30,7 +30,9 @@ function get(req, res, next) {
       if (user) {
         response.success(req, res, user, 200);
       }
-      response.error(req, res, 'No encontrado', 404)
+      else {
+        response.error(req, res, 'No encontrado', 404)
+      }
     })
     .catch(next);
 }
