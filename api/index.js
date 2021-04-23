@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const config = require('../config.js');
 const user = require('./components/user/network');
 const auth = require('./components/auth/network');
+const posts = require('./components/post/network');
 const errors = require('../network/errors');
 const swaggerUi = require('swagger-ui-express');
 
@@ -16,6 +17,7 @@ const { response } = require('express');
 // Definir las rutas
 app.use('/api/user', user);
 app.use('/api/auth', auth);
+app.use('/api/post', posts);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // El tratamiento de los mensajes de error será el último middleware que se le
