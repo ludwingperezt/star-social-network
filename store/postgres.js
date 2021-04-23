@@ -63,19 +63,13 @@ async function remove(table, id) {
   return pool.query(`DELETE FROM ${SCHEMA}.${table} WHERE id = $1`, [id]);
 }
 
-async function queryTable(table, q) {
-  const elements = await queryList(table, q);
-
-  return (elements.length) ? elements[0] : null;
-}
-
 async function insert (table, data) {
   const fieldsNames = Object.keys(data);
   let fields = fieldsNames.join(', ');
   const values = []
   const valuesRef = []
 
-  // const userExist = await queryTable(table, {username: data.username})
+  // const userExist = await queryOne(table, {username: data.username})
   
   // if (userExist !== null) {
   //   throw new error('Usuario ya existe', 400)
@@ -122,7 +116,26 @@ async function update (table, id, data) {
     });
 }
 
-async function queryList(table, q) {
+async function queryList(table, q, selects, joins) {
+
+  // Procesar JOINS
+  let queryJoins = '';
+  if (Array.isArray(joins) && joins.length) {
+    const listJoins = joins.map(value => {
+      return `${value.type} JOIN ${SCHEMA}.${value.table} ON ${SCHEMA}.${value.table}.${value.key} = ${SCHEMA}.${value.referenceTable}.${value.referenceKey}`
+    });
+
+    queryJoins = listJoins.join(' ');
+  }
+
+  // Procesar campos para SELECT
+  // Si no se especifica, seleccionar todos los campos
+  let querySelects = '*';
+
+  if (Array.isArray(selects) && selects.length) {
+    querySelects = selects.join(', ');
+  }
+
   const fieldsNames = Object.keys(q);
   const values = []
   const valuesRef = []
@@ -134,7 +147,7 @@ async function queryList(table, q) {
 
   const valuesOrder = valuesRef.join(' AND ');
 
-  const query = `SELECT * FROM ${SCHEMA}.${table} WHERE ${valuesOrder}`
+  const query = `SELECT ${querySelects} FROM ${SCHEMA}.${table} ${queryJoins} WHERE ${valuesOrder}`
 
   return pool
     .query(query, values)
@@ -143,11 +156,17 @@ async function queryList(table, q) {
     });
 }
 
+async function queryOne(table, q, selects, joins) {
+  const elements = await queryList(table, q, selects, joins);
+
+  return (elements.length) ? elements[0] : null;
+}
+
 module.exports = {
   list,
   get,
   remove,
-  query: queryTable,
+  query: queryOne,
   insert,
   update,
   queryList

@@ -99,9 +99,19 @@ module.exports = function (injectedStore) {
   }
 
   function followers(id) {
+    const joins = [{
+      type: 'INNER',
+      table: TABLA,
+      key: 'id',
+      referenceTable: TABLA + '_follow',
+      referenceKey: 'user_to'
+    }];
+
+    const fields = ['id', 'username', 'name', 'email', 'phone'];
+
     return store.queryList(TABLA + '_follow', {
       user_from: id
-    })
+    }, fields, joins)
   }
 
   return {
