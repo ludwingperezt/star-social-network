@@ -70,6 +70,15 @@ function follow(req, res, next) {
     .catch(next);
 }
 
+function followers(req, res, next) {
+  const idUser = req.params.id || req.user.id;
+  controller.followers(idUser)
+    .then(followers => {
+      response.success(req, res, followers, 200);
+    })
+    .catch(next); 
+}
+
 router.get('/', list);
 // router.post('/', upsert);
 router.post('/', insert);
@@ -77,6 +86,8 @@ router.get('/:id', get);
 //router.put('/', secure('update'), upsert);
 router.put('/:id', secure('update'), update);
 router.delete('/:id', secure('delete'), remove);
+router.get('/followers/:id', followers); // listar seguidores de un usuario
+router.get('/followers', secure('follow'), followers); // listar mis propios seguidores
 router.post('/follow/:id', secure('follow'), follow);
 
 module.exports = router;

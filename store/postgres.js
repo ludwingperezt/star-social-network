@@ -64,25 +64,9 @@ async function remove(table, id) {
 }
 
 async function queryTable(table, q) {
-  const fieldsNames = Object.keys(q);
-  const values = []
-  const valuesRef = []
+  const elements = await queryList(table, q);
 
-  fieldsNames.forEach((item, index) => {
-      valuesRef.push(`${item} = $${index + 1}`)
-      values.push(q[item])
-    })
-
-  const valuesOrder = valuesRef.join(' AND ');
-
-  const query = `SELECT * FROM ${SCHEMA}.${table} WHERE ${valuesOrder}`
-
-  return pool
-    .query(query, values)
-    .then(res => {
-      return (res.rowCount) ? res.rows[0] : null;
-    });
-
+  return (elements.length) ? elements[0] : null;
 }
 
 async function insert (table, data) {
@@ -138,11 +122,33 @@ async function update (table, id, data) {
     });
 }
 
+async function queryList(table, q) {
+  const fieldsNames = Object.keys(q);
+  const values = []
+  const valuesRef = []
+
+  fieldsNames.forEach((item, index) => {
+      valuesRef.push(`${item} = $${index + 1}`)
+      values.push(q[item])
+    })
+
+  const valuesOrder = valuesRef.join(' AND ');
+
+  const query = `SELECT * FROM ${SCHEMA}.${table} WHERE ${valuesOrder}`
+
+  return pool
+    .query(query, values)
+    .then(res => {
+      return (res.rowCount) ? res.rows : [];
+    });
+}
+
 module.exports = {
   list,
   get,
   remove,
   query: queryTable,
   insert,
-  update
+  update,
+  queryList
 };

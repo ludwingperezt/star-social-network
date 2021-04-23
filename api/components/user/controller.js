@@ -98,6 +98,12 @@ module.exports = function (injectedStore) {
     })
   }
 
+  function followers(id) {
+    return store.queryList(TABLA + '_follow', {
+      user_from: id
+    })
+  }
+
   return {
     list,
     get,
@@ -106,5 +112,6 @@ module.exports = function (injectedStore) {
     update,
     remove,
     follow,
+    followers
   };
 };
