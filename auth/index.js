@@ -21,6 +21,9 @@ const check = {
     if (decodedToken.id !== owner) {
       throw error('Acceso denegado!', 403);
     }
+  },
+  logged: function(req) {
+    const decodedToken = decodeHeader(req);
   }
 }
 

@@ -62,6 +62,14 @@ function remove(req, res, next) {
     .catch(next);
 }
 
+function follow(req, res, next) {
+  controller.follow(req.user.id, req.params.id)
+    .then(data => {
+      response.success(req, res, data, 201);
+    })
+    .catch(next);
+}
+
 router.get('/', list);
 // router.post('/', upsert);
 router.post('/', insert);
@@ -69,5 +77,6 @@ router.get('/:id', get);
 //router.put('/', secure('update'), upsert);
 router.put('/:id', secure('update'), update);
 router.delete('/:id', secure('delete'), remove);
+router.post('/follow/:id', secure('follow'), follow);
 
 module.exports = router;

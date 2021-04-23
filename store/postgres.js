@@ -54,11 +54,11 @@ async function get (table, id) {
 }
 
 async function remove(table, id) {
-  let item = await get(table, id)
+  // let item = await get(table, id)
 
-  if (item === null) {
-    throw new error('No encontrado', 404)
-  }
+  // if (item === null) {
+  //   throw new error('No encontrado', 404)
+  // }
 
   return pool.query(`DELETE FROM ${SCHEMA}.${table} WHERE id = $1`, [id]);
 }
@@ -91,11 +91,11 @@ async function insert (table, data) {
   const values = []
   const valuesRef = []
 
-  const userExist = await queryTable(table, {username: data.username})
+  // const userExist = await queryTable(table, {username: data.username})
   
-  if (userExist !== null) {
-    throw new error('Usuario ya existe', 400)
-  }
+  // if (userExist !== null) {
+  //   throw new error('Usuario ya existe', 400)
+  // }
 
   fieldsNames.forEach((item, index) => {
     values.push(data[item])
