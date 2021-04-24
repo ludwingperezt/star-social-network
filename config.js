@@ -16,5 +16,8 @@ module.exports = {
   postgresService: {
     host: process.env.POSTGRES_SRV_HOST || 'localhost',
     port: process.env.POSTGRES_SRV_PORT || 3001
-  }
+  },
+  post: {
+    port: process.env.POST_PORT || 3002
+  },
 }
