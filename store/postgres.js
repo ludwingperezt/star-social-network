@@ -136,18 +136,22 @@ async function queryList(table, q, selects, joins) {
     querySelects = selects.join(', ');
   }
 
-  const fieldsNames = Object.keys(q);
-  const values = []
-  const valuesRef = []
+  // Preparar sentencia WHERE
+  let valuesOrder = '';
+  let values = []
+  if (q) {
+    const fieldsNames = Object.keys(q);
+    const valuesRef = []
 
-  fieldsNames.forEach((item, index) => {
-      valuesRef.push(`${item} = $${index + 1}`)
-      values.push(q[item])
-    })
+    fieldsNames.forEach((item, index) => {
+        valuesRef.push(`${item} = $${index + 1}`)
+        values.push(q[item])
+      })
 
-  const valuesOrder = valuesRef.join(' AND ');
+    valuesOrder = 'WHERE ' + valuesRef.join(' AND ');
+  }
 
-  const query = `SELECT ${querySelects} FROM ${SCHEMA}.${table} ${queryJoins} WHERE ${valuesOrder}`
+  const query = `SELECT ${querySelects} FROM ${SCHEMA}.${table} ${queryJoins} ${valuesOrder}`
 
   return pool
     .query(query, values)
