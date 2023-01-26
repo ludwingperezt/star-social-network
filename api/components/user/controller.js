@@ -3,7 +3,8 @@ const auth = require('../auth')
 
 const TABLA = 'user';
 
-module.exports = function (injectedStore) {
+module.exports = function (injectedStore, injectedCache) {
+  let cache = injectedCache;
   let store = injectedStore;
 
   // Si no se recibe un repositorio inyectado, entonces por defecto se toma
@@ -11,9 +12,32 @@ module.exports = function (injectedStore) {
   if (!store) {
     store = require('../../../store/dummy');
   }
+
+  if (!cache) {
+    // este es solo un arreglo para tener una base de datos de cache por defecto.
+    store = require('../../../store/dummy');
+  }
   
-  function list () {
-    return store.list(TABLA);
+  /**
+   * Retorna la lista de usuarios en la base de datos.
+   * 
+   * En primer lugar busca en la caché. Si no están ahí los datos los busca en la
+   * base de datos y luego los inserta en la caché para que estén disponibles.
+   * 
+   * @returns 
+   */
+  async function list () {
+    let users = await cache.list(TABLA);
+
+    if (!users) {
+      console.log("Datos no estan en cache, ir a DB");
+      users = await store.list(TABLA)
+      cache.upsert(TABLA, users);
+    }
+    else {
+      console.log("Datos encontrados en cache!");
+    }
+    return users;
   }
 
   function get (id) {

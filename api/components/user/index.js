@@ -12,13 +12,16 @@ const controller = require('./controller');
 // a la db será a través del componente de la base de datos.
 // Si esa variable es true, entonces el acceso a la db se haría a través del
 // microservicio API de acceso a la base de datos.
-let store;
+let store, cache;
+
 if (config.remoteDB === true) {
-    store = require('../../../store/postgres');    
+    store = require('../../../store/remote-postgres');
+    cache = require('../../../store/remote-cache'); 
 }
 else {
-    store = require('../../../store/remote-postgres');
+    store = require('../../../store/postgres'); 
+    cache = require('../../../store/redis'); 
 }
 
 // Se inyecta el repositorio al controlador
-module.exports = controller(store);
+module.exports = controller(store, cache);
