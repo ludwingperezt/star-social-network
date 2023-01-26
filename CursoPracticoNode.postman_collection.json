@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "24fe52f2-c5f7-4460-bcfe-c6eba68c199a",
+		"name": "CursoPracticoNode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18643674"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "List all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InQxNFpIUWFhTjdoZlpKU2U5NGwwWSIsInVzZXJuYW1lIjoianVhbiIsInBhc3N3b3JkIjoiJDJiJDA1JHNrRkRiYlJnaTBaT0ZVaTg5SFdCVy42dWN5cFlKZXY4LnMzTmFCR2U4a01wZm8ubkhicE8yIiwiaWF0IjoxNjE5MTk2NTcyfQ.IK620K238UyJ-oFrpfgaiP48rTh8yI5qsyS1GEJGKRQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"Mi primer post\", \"post\": \"Lorem ipsum dolor sit amet\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3002/api/post/i5wYYagv7fQ9vwGM3eJsT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"post",
+								"i5wYYagv7fQ9vwGM3eJsT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InQxNFpIUWFhTjdoZlpKU2U5NGwwWSIsInVzZXJuYW1lIjoianVhbiIsInBhc3N3b3JkIjoiJDJiJDA1JHNrRkRiYlJnaTBaT0ZVaTg5SFdCVy42dWN5cFlKZXY4LnMzTmFCR2U4a01wZm8ubkhicE8yIiwiaWF0IjoxNjE5MTk2NTcyfQ.IK620K238UyJ-oFrpfgaiP48rTh8yI5qsyS1GEJGKRQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"Mi segundo post\", \"post\": \"Lorem ipsum dolor sit amet...\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/api/post/i5wYYagv7fQ9vwGM3eJsT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"post",
+								"i5wYYagv7fQ9vwGM3eJsT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InQxNFpIUWFhTjdoZlpKU2U5NGwwWSIsInVzZXJuYW1lIjoianVhbiIsInBhc3N3b3JkIjoiJDJiJDA1JHNrRkRiYlJnaTBaT0ZVaTg5SFdCVy42dWN5cFlKZXY4LnMzTmFCR2U4a01wZm8ubkhicE8yIiwiaWF0IjoxNjE5MTk2NTcyfQ.IK620K238UyJ-oFrpfgaiP48rTh8yI5qsyS1GEJGKRQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3002/api/post/FAJPtgOmH2Jc192LbN0If",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"post",
+								"FAJPtgOmH2Jc192LbN0If"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microservicio db",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/user/t14ZHQaaN7hfZJSe94l0Y",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"t14ZHQaaN7hfZJSe94l0Y"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"oscar mendoza\", \"username\": \"omendoza\", \"email\":\"oscar@mail.com\", \"phone\": \"12345678\", \"id\": \"g3mziM2JB4LUMcFu02Tbm\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/user/g3mziM2JB4LUMcFu02Tbm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"g3mziM2JB4LUMcFu02Tbm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Hmer\", \"email\": \"homeroh@homeroh.com\", \"phone\":\"+5 000000000\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/user/xh7ViM2JB4LUMcFu0_e5B",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"xh7ViM2JB4LUMcFu0_e5B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/user/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"query"
+							],
+							"query": [
+								{
+									"key": "filters",
+									"value": "{\"uno\":[\"dos\", \"tres\"]}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User query one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/user/queryOne",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"queryOne"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Listar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InhoN1ZpTTJKQjRMVU1jRnUwX2U1QiIsInVzZXJuYW1lIjoiaG9tZXJvIiwicGFzc3dvcmQiOiIkMmIkMDUkMi5XQjZ6ZnhkSkdRMm5qUWl1Z1hiTzlFRjdBM3RtangyT3pQVEhBR2w2T3dEUmVwWlVIUW0iLCJpYXQiOjE2MTkyMjA1NTB9.9OCbShonq0frz2IS5_hg5TY5byuw1dgfsersBOirfbs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Homero H.\", \"email\": \"hh@hh.com\", \"phone\":\"+5 1564684849\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user/xh7ViM2JB4LUMcFu0_e5B",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"xh7ViM2JB4LUMcFu0_e5B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"vilma tax\", \"username\": \"vtax\", \"password\":\"vtax\", \"email\": \"vilma@tax.com\", \"phone\": \"22222222\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/user/xh7ViM2JB4LUMcFu0_e5B",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"xh7ViM2JB4LUMcFu0_e5B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InQxNFpIUWFhTjdoZlpKU2U5NGwwWSIsInVzZXJuYW1lIjoianVhbiIsInBhc3N3b3JkIjoiJDJiJDA1JHNrRkRiYlJnaTBaT0ZVaTg5SFdCVy42dWN5cFlKZXY4LnMzTmFCR2U4a01wZm8ubkhicE8yIiwiaWF0IjoxNjE5MjE5NjI3fQ.FEplQquMTlu6TIm2LKmTc3eNdEw4jLjiCsWdsRBaPls",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/user/t14ZHQaaN7hfZJSe94l0Y",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"t14ZHQaaN7hfZJSe94l0Y"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Microservicio Cache",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upsert",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\": \"t14ZHQaaN7hfZJSe94l0Y\", \"name\":\"Hmer\", \"email\": \"homeroh@homeroh.com\", \"phone\":\"+5 000000000\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/user/t14ZHQaaN7hfZJSe94l0Y",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user",
+								"t14ZHQaaN7hfZJSe94l0Y"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"homero\",\n    \"password\": \"homero\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InQxNFpIUWFhTjdoZlpKU2U5NGwwWSIsInVzZXJuYW1lIjoianVhbiIsInBhc3N3b3JkIjoiJDJiJDA1JHNrRkRiYlJnaTBaT0ZVaTg5SFdCVy42dWN5cFlKZXY4LnMzTmFCR2U4a01wZm8ubkhicE8yIiwiaWF0IjoxNjE5MTk2NTcyfQ.IK620K238UyJ-oFrpfgaiP48rTh8yI5qsyS1GEJGKRQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/user/follow/xh7ViM2JB4LUMcFu0_e5B",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"follow",
+						"xh7ViM2JB4LUMcFu0_e5B"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/user/followers/t14ZHQaaN7hfZJSe94l0Y",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"followers",
+						"t14ZHQaaN7hfZJSe94l0Y"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
