@@ -1,4 +1,4 @@
-const { nanoid } = require('nanoid');
+const { nanoid } = require('nanoid');  // Nanoid genera IDs
 const auth = require('../auth')
 
 const TABLA = 'user';
@@ -6,6 +6,8 @@ const TABLA = 'user';
 module.exports = function (injectedStore) {
   let store = injectedStore;
 
+  // Si no se recibe un repositorio inyectado, entonces por defecto se toma
+  // el controlador dummy.
   if (!store) {
     store = require('../../../store/dummy');
   }

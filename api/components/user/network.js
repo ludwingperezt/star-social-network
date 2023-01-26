@@ -1,3 +1,8 @@
+/**
+ * Aquí se define el componente de red del componente de usuario.
+ * 
+ * En este archivo se define el ruteo del componente.
+ */
 const express = require('express');
 const secure = require('./secure');
 const response = require('../../../network/response');

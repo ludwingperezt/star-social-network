@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Star - Red social Headless hecha con NodeJs",
+    "description": "NodeSocial - Red social Headless hecha con NodeJs",
     "version": "1.0.0",
-    "title": "Star"
+    "title": "NodeSocial"
   },
   "host": "localhost:3000",
   "basePath": "/api",

@@ -1,3 +1,6 @@
+/**
+ * Funciones de manejo de tokens JWT.
+ */
 const bcrypt = require('bcrypt');
 const auth = require('../../../auth');
 const TABLA = 'auth';
@@ -34,6 +37,7 @@ module.exports = function (injectedStore) {
     }
 
     if (data.password) {
+      // El 5 es el salt del cifrado
       authData.password = await bcrypt.hash(data.password, 5);
     }
 

@@ -1,3 +1,9 @@
+/**
+ * Base de datos falsa para pruebas.
+ * 
+ * Este componente simula una base de datos.
+ */
+
 // Archivo del repositorio
 const error = require('../utils/error');
 

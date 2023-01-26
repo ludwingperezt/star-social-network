@@ -1,3 +1,10 @@
+/**
+ * En este módulo se hace el procesamiento de errores a nivel de toda la aplicación.
+ * 
+ * Lo que se evita con esto es enviar la traza completa de los errores en la respuesta.
+ * 
+ */
+
 const response = require('./response');
 
 function errors (error, req, res, next) {

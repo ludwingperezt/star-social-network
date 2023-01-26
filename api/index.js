@@ -1,6 +1,11 @@
+/**
+ * Este es el archivo raíz de acceso al proyecto.  
+ * 
+ * Desde esta parte se llaman al resto de componentes de toda la aplicación.
+ */
 const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('../config.js');
+const bodyParser = require('body-parser');  // Esto permite trabajar datos con JSON
+const config = require('../config.js');  // Archivo de configuración que va en la carpeta raíz del proyecto
 const user = require('./components/user/network');
 const auth = require('./components/auth/network');
 const errors = require('../network/errors');
