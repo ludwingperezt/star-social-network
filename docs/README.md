@@ -17,17 +17,25 @@ los componentes:
             antes del controller).
     4.4. Index.js: Archivo que define cómo se interactua con el microservicio.
 
-En este proyecto la autenticación no es parte de los datos de usuario.
+En este proyecto la autenticación no es parte de los datos de usuario sino que es
+almacenada en una tabla independiente.
 
-https://editor.swagger.io
+## Documentación
 
+Para documentar la API se usa el standar OpenAPI de swagger. Para buscar una plantilla
+para la documentación se puede ir a la siguiente URL:
+[Swagger Editor](https://editor.swagger.io)
+
+## Gestión de microservicios con pm2
 
 pm2 es una herramienta que permite gestionar todos los microservicios en producción.
 
-pm2 status
+### Comandos
 
-pm2 logs <id del proceso>
+* ´´´pm2 status´´´ para ver el estado de los microservicios gestionados
 
-pm2 stop <id del proceso>
+* ´´´pm2 logs <id del proceso>´´´ Para ver los logs de un microservicio
 
-pm2 restart <id del proceso>
+* ´´´pm2 stop <id del proceso>´´´ Para detener uno o varios microservicios
+
+* ´´´pm2 restart <id del proceso>´´´ Para reiniciar algún microservicio.
