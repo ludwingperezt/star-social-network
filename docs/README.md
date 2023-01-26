@@ -39,3 +39,29 @@ pm2 es una herramienta que permite gestionar todos los microservicios en producc
 * ´´´pm2 stop <id del proceso>´´´ Para detener uno o varios microservicios
 
 * ´´´pm2 restart <id del proceso>´´´ Para reiniciar algún microservicio.
+
+## Despliegue en un servidor
+
+1. Instalar node
+2. Instalar git
+3. Instalar pm2
+4. Clonar el proyecto desde git
+5. Instalar las dependencias
+6. Iniciar los servicios con pm2
+7. Instalar nginx como reverse proxy
+8. Configurar las rutas de nginx para que funcione como un reverse proxy
+    - Modificar el archivo /etc/nginx/sites-available/default y agregar lo siguiente:
+        ´´´
+        location /api/user {
+            proxy_pass http://localhost:3000
+        }
+
+        location /api/auth {
+            proxy_pass http://localhost:3000
+        }
+
+        location /api/posts {
+            proxy_pass http://localhost:3002
+        }
+        ´´´
+    - Reiniciar nginx
