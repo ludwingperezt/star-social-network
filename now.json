@@ -1,0 +1,42 @@
+{
+    "version": 2,
+    "env": {
+        "NODE_ENV": "production",
+        "REMOTE_DB": "@remote_db",
+        "API_PORT": "@api_port",
+        "JWT_SECRET": "@jwt_secret",
+        "POSTGRES_HOST": "@pg_host",
+        "POSTGRES_USER": "@pg_user",
+        "POSTGRES_PASSWORD": "@pg_password",
+        "POSTGRES_DB": "@pg_db",
+        "POSTGRES_PORT": "@pg_port",
+        "POSTGRES_SCHEMA": "@pg_schema",
+        "POSTGRES_SRV_HOST": "@pg_server_host",
+        "POSTGRES_SRV_PORT": "@pg_server_port",
+        "POST_PORT": "@post_port"
+    },
+    "builds": [
+        {
+            "src": "api/index.js",
+            "use": "@now/node"
+        },
+        {
+            "src": "posts/index.js",
+            "use": "@now/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/auth(.*)",
+            "dest": "/api/index.js"
+        },
+        {
+            "src": "/api/user(.*)",
+            "dest": "/api/index.js"
+        },
+        {
+            "src": "/api/post(.*)",
+            "dest": "/posts/index.js"
+        }
+    ]
+}
